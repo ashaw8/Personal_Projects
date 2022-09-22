@@ -96,8 +96,9 @@ def main():
         Select the service you would like by typing in one of the following:\n\
         \tEncrypt_password\n \
         \tDecrypt_password\n \
-        \tEncrypt message\n  \
-        \tDecrypt message')
+        \tEncrypt message\n \
+        \tDecrypt message\n \
+        \tHelp')
     user_options = input()
     
     #Option to run encrypt password function if user calls it
@@ -131,7 +132,15 @@ def main():
                 "end file name with .txt")
         decrypt_file_name = input()
         write_encryption_file(decrypt_file_name, ru)
-    
-
+    #help page for explaination on each option
+    elif user_options in ['Help', 'help']:
+        print("\nEncrypt_password: \
+                \nDecrypt_passwords \
+                \nEncrypt message: \
+               \nDecrypt message:")
+        print("enter the character b to go back to menu")
+        user_back = input()
+        if user_back == 'b':
+            main()
                     
 main()
