@@ -132,6 +132,7 @@ def main():
                 "end file name with .txt")
         decrypt_file_name = input()
         write_encryption_file(decrypt_file_name, ru)
+    
     #help page for explaination on each option
     elif user_options in ['Help', 'help']:
         print("\nEncrypt_password: \
