@@ -1,35 +1,27 @@
+import random
+
 
 def alphabet_dict():
-    a_dict =  { "a":int, 
-                "b":int,
-                "c":int,
-                "d":int,
-                "e":int,
-                "f":int,
-                "g":int,
-                "h":int,
-                "i":int,
-                "j":int,
-                "k":int,
-                "l":int,
-                "m":int,
-                "n":int,
-                "o":int,
-                "p":int,
-                "q":int,
-                "r":int,
-                "s":int,
-                "t":int,
-                "u":int,
-                "v":int,
-                "w":int,
-                "x":int, 
-                "y":int,
-                "z":int,  }
-    for key, values in range(a_dict):
-        # iterate out all keys, put in list, combine list of random numbers
-        # pass back in w/ alternate key and random num as value in dict
-        print(key, values)
+    letters = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p", \
+               "q","r","s","t","u","v","w","x","y","z"]
+    dict_keys = []
+    data = random.sample(range(1,27), 26)
+    final_list = []
+    for i in letters:
+        dict_keys.append(i)
+
+    for num, letter in zip(dict_keys, data):
+            final_list.append(num)
+            final_list.append(letter)
+
+    return final_list
+
+def list_to_dict(lst):
+    res_dct = {lst[i]: lst[i + 1] for i in range(0, len(lst), 2)}
+    return res_dct
+        
+    print(list_to_dict(final_list))
+
     
 def guess_word(guess):
     word = "orange"
@@ -68,4 +60,4 @@ def main():
             print("not in letter")
         
 
-main()
+alphabet_dict()
