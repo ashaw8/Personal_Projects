@@ -1,6 +1,7 @@
 
 from asyncore import read, write
 import sys
+import random
 
 
 def encryption(): #need to add capital letters
@@ -74,6 +75,9 @@ def decrypt_message(password):
     return ''.join(decrypted_password)
         
 def new_password():
+    enc_dic = encryption()
+    random_c = random.choice(list(enc_dic.values()))
+    return random_c
 #Creates newly generated password for user
     return
 
@@ -144,4 +148,4 @@ def main():
         if user_back == 'b':
             main()
                     
-main()
+new_password()
