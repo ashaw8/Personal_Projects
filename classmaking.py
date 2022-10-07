@@ -4,15 +4,12 @@ import random
 def alphabet_dict():
     letters = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p", \
                "q","r","s","t","u","v","w","x","y","z"]
-    dict_keys = []
-    data = random.sample(range(1,27), 26)
-    final_list = []
-    for i in letters:
-        dict_keys.append(i)
+    random_nums = random.sample(range(1,27), 26)#Random order of numbers 1 - 26
+    final_list = [] #List of letter and random number alternating
 
-    for num, letter in zip(dict_keys, data):
-            final_list.append(num)
-            final_list.append(letter)
+    for num, letter in zip(letters, random_nums):#Combining our two lists random numbers and letters
+            final_list.append(num)#Number first to be key in dict
+            final_list.append(letter)#alternate with number to be value
 
     return final_list
 
@@ -20,7 +17,6 @@ def list_to_dict(lst):
     res_dct = {lst[i]: lst[i + 1] for i in range(0, len(lst), 2)}
     return res_dct
         
-    print(list_to_dict(final_list))
 
     
 def guess_word(guess):
@@ -60,4 +56,5 @@ def main():
             print("not in letter")
         
 
-alphabet_dict()
+alpha = alphabet_dict()
+print(list_to_dict(alpha))
