@@ -17,10 +17,24 @@ def list_to_dict(lst):
     res_dct = {lst[i]: lst[i + 1] for i in range(0, len(lst), 2)}#Assign key/value pairs by alternating through range of list
     return res_dct
         
-def num_under(num_char_in_words):
+def num_under(word):
+    """Matches a number to each letter in the word being guessed
+
+    Args:
+        word (str): Word being guessed in game
+
+    Returns:
+        _type_: _description_
+    """
+    a_dict = alphabet_dict()
+    a_dict = list_to_dict(a_dict)
+    numbers = []
+    for char in word:
+        if char in a_dict.keys():
+            numbers.append(list(a_dict.values())[list(a_dict.keys()).index(char)])      
     
-    #formatting under scores
-    return
+    numbers = [str(x) for x in numbers]
+    return '  '.join(numbers)
 
 def under_Scores(num_of_char):
     #formatting under scores
@@ -46,11 +60,12 @@ def main():
     
     flag = True
     guessed_letters = []
+    under_Scores("orange")
+    print(num_under("orange"))
     
     while flag is True:
         
         print("Enter a letter to guess word")
-        under_Scores("orange")
         guess = guess_word(input())
         
         if guess != False:
@@ -69,4 +84,4 @@ def main():
 #alpha = alphabet_dict()
 #print(list_to_dict(alpha))
 #num_under()
-main()
+main() 
