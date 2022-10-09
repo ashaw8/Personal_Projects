@@ -34,7 +34,12 @@ def num_under(word):
             numbers.append(list(a_dict.values())[list(a_dict.keys()).index(char)])      
     
     numbers = [str(x) for x in numbers]
-    return '  '.join(numbers)
+    string = "_\t"
+    string = string * len(word)
+    numbers = '\t'.join(numbers)
+    print(string)
+    print(numbers)
+    
 
 def under_Scores(num_of_char):
     #formatting under scores
@@ -43,7 +48,7 @@ def under_Scores(num_of_char):
     print(string)
     
 def guess_word(guess):
-    word = "orange"
+    word = "banana"
     if guess in word:
         return guess
     else:
@@ -60,8 +65,8 @@ def main():
     
     flag = True
     guessed_letters = []
-    under_Scores("orange")
-    print(num_under("orange"))
+    under_Scores("unicorn")
+    print(num_under("banana"))
     
     while flag is True:
         
@@ -83,5 +88,5 @@ def main():
 
 #alpha = alphabet_dict()
 #print(list_to_dict(alpha))
-#num_under()
-main() 
+num_under("banana")
+#main() 
