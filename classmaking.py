@@ -14,10 +14,19 @@ def alphabet_dict():
     return final_list
 
 def list_to_dict(lst):
-    res_dct = {lst[i]: lst[i + 1] for i in range(0, len(lst), 2)}
+    res_dct = {lst[i]: lst[i + 1] for i in range(0, len(lst), 2)}#Assign key/value pairs by alternating through range of list
     return res_dct
         
+def num_under(num_char_in_words):
+    
+    #formatting under scores
+    return
 
+def under_Scores(num_of_char):
+    #formatting under scores
+    string = "  _"
+    string = string * len(num_of_char)
+    print(string)
     
 def guess_word(guess):
     word = "orange"
@@ -41,6 +50,7 @@ def main():
     while flag is True:
         
         print("Enter a letter to guess word")
+        under_Scores("orange")
         guess = guess_word(input())
         
         if guess != False:
@@ -56,5 +66,7 @@ def main():
             print("not in letter")
         
 
-alpha = alphabet_dict()
-print(list_to_dict(alpha))
+#alpha = alphabet_dict()
+#print(list_to_dict(alpha))
+#num_under()
+main()
