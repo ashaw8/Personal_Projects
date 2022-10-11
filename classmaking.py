@@ -2,7 +2,17 @@ import random
 
 class HangMan:
     def __init__(self, word, a_dict) -> None:
-        pass
+        numbers = []
+        for char in word:
+            if char in a_dict.keys():
+                numbers.append(list(a_dict.values())[list(a_dict.keys()).index(char)])      
+        
+        numbers = [str(x) for x in numbers]
+        string = "_\t"
+        string = string * len(word)
+        numbers = '\t'.join(numbers)
+        print(string)
+        print(numbers)
 
     def display_art(self,round):
         if round == 1:
@@ -14,7 +24,8 @@ class HangMan:
         |
         |
     ========='''
-        
+            return start
+        elif round == 2:
             wrong1 = '''
     +---+
     |   |
@@ -23,7 +34,8 @@ class HangMan:
         |
         |
     ========='''
-
+            return wrong1
+        elif round == 3:
             wrong2 = '''
     +---+
     |   |
@@ -32,7 +44,8 @@ class HangMan:
         |
         |
     ========='''
-
+            return wrong2
+        elif round == 4:
             wrong3 = '''
     +---+
     |   |
@@ -82,31 +95,7 @@ def alphabet_dict():
 
 #def list_to_dict(lst):
     #res_dct = {lst[i]: lst[i + 1] for i in range(0, len(lst), 2)}#Assign key/value pairs by alternating through range of list
-    #return res_dct
-        
-def num_under(word):
-    """Matches a number to each letter in the word being guessed
-
-    Args:
-        word (str): Word being guessed in game
-
-    Returns:
-        _type_: _description_
-    """
-    a_dict = alphabet_dict()
-    a_dict = list_to_dict(a_dict)
-    numbers = []
-    for char in word:
-        if char in a_dict.keys():
-            numbers.append(list(a_dict.values())[list(a_dict.keys()).index(char)])      
-    
-    numbers = [str(x) for x in numbers]
-    string = "_\t"
-    string = string * len(word)
-    numbers = '\t'.join(numbers)
-    print(string)
-    print(numbers)
-    
+    #return res_dct  
 
 def under_Scores(num_of_char):
     #formatting under scores
@@ -153,7 +142,8 @@ def main():
             print("not in letter")
         
 
-#alpha = alphabet_dict()
+alpha = alphabet_dict()
 #print(list_to_dict(alpha))
-num_under("banana")
+#num_under("banana")
 #main() 
+HangMan("banana",alpha )
