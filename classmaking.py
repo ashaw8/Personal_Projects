@@ -1,67 +1,71 @@
 import random
 
 class HangMan:
-    def __init__(self) -> None:
+    def __init__(self, word, a_dict) -> None:
+        pass
+
+    def display_art(self,round):
+        if round == 1:
+            start = '''
+    +---+
+    |   |
+        |
+        |
+        |
+        |
+    ========='''
         
-        self.start = '''
-  +---+
-  |   |
-      |
-      |
-      |
-      |
-========='''
+            wrong1 = '''
+    +---+
+    |   |
+    O   |
+        |
+        |
+        |
+    ========='''
 
-        self.wrong1 = '''
-  +---+
-  |   |
-  O   |
-      |
-      |
-      |
-========='''
+            wrong2 = '''
+    +---+
+    |   |
+    O   |
+    |   |
+        |
+        |
+    ========='''
 
-        self.wrong2 = '''
-  +---+
-  |   |
-  O   |
-  |   |
-      |
-      |
-========='''
-
-        self.wrong3 = '''
-  +---+
-  |   |
-  O   |
- /|   |
-      |
-      |
-========='''
-        self.wrong4 = '''
-  +---+
-  |   |
-  O   |
- /|\  |
-      |
-      |
-========='''
-        self.wrong5 = '''
-  +---+
-  |   |
-  O   |
- /|\  |
- /    |
-      |
-========='''
-        self.wrong6 = '''
-  +---+
-  |   |
-  O   |
- /|\  |
- / \  |
-      |
-========='''
+            wrong3 = '''
+    +---+
+    |   |
+    O   |
+    /|   |
+        |
+        |
+    ========='''
+            wrong4 = '''
+    +---+
+    |   |
+    O   |
+    /|\  |
+        |
+        |
+    ========='''
+            wrong5 = '''
+    +---+
+    |   |
+    O   |
+    /|\  |
+    /    |
+        |
+    ========='''
+            wrong6 = '''
+    +---+
+    |   |
+    O   |
+    /|\  |
+    / \  |
+        |
+    ========='''
+        
         
 def alphabet_dict():
     letters = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p", \
@@ -73,11 +77,12 @@ def alphabet_dict():
             final_list.append(num)#Number first to be key in dict
             final_list.append(letter)#alternate with number to be value
 
-    return final_list
+    dict = {final_list[i]: final_list[i + 1] for i in range(0, len(final_list), 2)}
+    return dict
 
-def list_to_dict(lst):
-    res_dct = {lst[i]: lst[i + 1] for i in range(0, len(lst), 2)}#Assign key/value pairs by alternating through range of list
-    return res_dct
+#def list_to_dict(lst):
+    #res_dct = {lst[i]: lst[i + 1] for i in range(0, len(lst), 2)}#Assign key/value pairs by alternating through range of list
+    #return res_dct
         
 def num_under(word):
     """Matches a number to each letter in the word being guessed
