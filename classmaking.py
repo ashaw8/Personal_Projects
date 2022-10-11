@@ -1,19 +1,28 @@
 import random
+from re import X
 
 class HangMan:
     def __init__(self, word, a_dict) -> None:
-        numbers = []
+        self.game = []
+        self.a_dict = a_dict
         for char in word:
             if char in a_dict.keys():
-                numbers.append(list(a_dict.values())[list(a_dict.keys()).index(char)])      
+                self.game.append(list(a_dict.values())[list(a_dict.keys()).index(char)])
+        #print(self.a_dict)      
+        #self.game = [str(x) for x in self.game]
         
-        numbers = [str(x) for x in numbers]
+    def format_game(self,word):
         string = "_\t"
-        string = string * len(word)
-        numbers = '\t'.join(numbers)
-        print(string)
-        print(numbers)
-
+        self.game = '\t'.join(self.game)
+        self.game = f'{string * len(word)}\n{self.game}'
+        
+    def add_letter(self, dict, guess_letter):
+        key_dic = dict[guess_letter]
+        if key_dic in dict.values() and key_dic == key_dic:
+                return [guess_letter if x == key_dic else x for x in self.game]
+                #print([guess_letter if x == key_dic else x for x in self.game])
+                #kickoff = [item.replace(number,guess_letter) for item in self.game if int(number) in dict.values()]
+    
     def display_art(self,round):
         if round == 1:
             start = '''
@@ -96,12 +105,6 @@ def alphabet_dict():
 #def list_to_dict(lst):
     #res_dct = {lst[i]: lst[i + 1] for i in range(0, len(lst), 2)}#Assign key/value pairs by alternating through range of list
     #return res_dct  
-
-def under_Scores(num_of_char):
-    #formatting under scores
-    string = "  _"
-    string = string * len(num_of_char)
-    print(string)
     
 def guess_word(guess):
     word = "banana"
@@ -121,20 +124,18 @@ def main():
     
     flag = True
     guessed_letters = []
-    under_Scores("unicorn")
-    print(num_under("banana"))
+    alpha = alphabet_dict()
+    print("Enter a letter to guess word\n")
+    game = HangMan("banana",alpha )
     
     while flag is True:
-        
-        print("Enter a letter to guess word")
+        print("Guess:")
         guess = guess_word(input())
-        
         if guess != False:
             
             if guess not in guessed_letters:
                 guessed_letters.append(guess)
-                print(display_found_letters(guessed_letters))
-                
+                p
             else:
                 print("You've already used this letter")
 
@@ -145,5 +146,8 @@ def main():
 alpha = alphabet_dict()
 #print(list_to_dict(alpha))
 #num_under("banana")
-#main() 
-HangMan("banana",alpha )
+#main()
+man= HangMan("banana",alpha)
+man.add_letter(alpha, "a")
+man.format_game("banana")
+print(man)
