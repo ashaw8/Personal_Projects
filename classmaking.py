@@ -1,3 +1,4 @@
+from pdb import line_prefix
 import random
 from re import X
 
@@ -16,12 +17,17 @@ class HangMan:
         self.game = '\t'.join(self.game)
         self.game = f'{string * len(word)}\n{self.game}'
         
-    def add_letter(self, dict, guess_letter):
-        key_dic = dict[guess_letter]
-        if key_dic in dict.values() and key_dic == key_dic:
-                return [guess_letter if x == key_dic else x for x in self.game]
+    def add_letter(self, guess_letter):
+        key_dic = self.a_dict[guess_letter]
+        if key_dic in self.a_dict.values() and key_dic == key_dic:
+                self.game[:] = [guess_letter if x == key_dic else x for x in self.game]
                 #print([guess_letter if x == key_dic else x for x in self.game])
+                return self.game
                 #kickoff = [item.replace(number,guess_letter) for item in self.game if int(number) in dict.values()]
+    
+    def test(self):
+        for i in self.game:
+            print(i)
     
     def display_art(self,round):
         if round == 1:
@@ -127,15 +133,17 @@ def main():
     alpha = alphabet_dict()
     print("Enter a letter to guess word\n")
     game = HangMan("banana",alpha )
-    
-    while flag is True:
+
+    while flag == True:
         print("Guess:")
         guess = guess_word(input())
         if guess != False:
             
             if guess not in guessed_letters:
                 guessed_letters.append(guess)
-                p
+                current_letters = game.add_letter(guess)
+                current_letters = [str(x) for x in current_letters]
+                print(current_letters)
             else:
                 print("You've already used this letter")
 
@@ -143,11 +151,11 @@ def main():
             print("not in letter")
         
 
-alpha = alphabet_dict()
+#alpha = alphabet_dict()
 #print(list_to_dict(alpha))
 #num_under("banana")
-#main()
-man= HangMan("banana",alpha)
-man.add_letter(alpha, "a")
-man.format_game("banana")
-print(man)
+main()
+#man= HangMan("banana",alpha)
+#man = man.test()
+#man.format_game("banana")
+#print(man)
