@@ -6,8 +6,8 @@ Credits:
 chrishorton https://github.com/chrishorton 
 For Hangman Art
 """
-from ast import Return
 import random
+from re import T
 
 
 class HangMan:
@@ -108,9 +108,7 @@ def format_game(list_of_letter, round):
     print(display_art(round))
     letter_list = [str(x) for x in list_of_letter] #Change our list of ints and stings to list of only strings
     print('\t'.join(letter_list)) #print our strings with tab spaces inbetween
-
-            
-        
+       
 def alphabet_dict():
     letters = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p", \
                "q","r","s","t","u","v","w","x","y","z"]#List of letters
@@ -138,9 +136,16 @@ def word_bank():
                      "america","mexico","dental","oxygen","bookworm","vodka"]
     return random.choice(bank_of_words)
 
+def if_winner(list_of_letters, playin_word):
+    ceck = [str(x) for x in list_of_letters]
+    ceck = "".join(ceck)
+    if ceck == playin_word:
+        return True
+    else:
+        return False
+    
 def main():
      
-    flag = True
     guessed_letters = []
     alpha = alphabet_dict()
     word = word_bank()
@@ -149,43 +154,49 @@ def main():
     game.start_of_game()
     round_counter = 1 #Round counter, starts at so user sees 1 first instead 0
     current_letters = game.add_letter(123)
-
+    
     while True:
         
-        if round_counter == 7: #When user failed 7 attempts, game ends
+        if if_winner(current_letters, word) ==  True:
+            print("winner")
             break
-        
-        else:
-      
-            print("Guess:")
-            guess = guess_word(input(), word)#sending user input to be checked if correct
             
-            if guess == word:
-                print("You won!")
+        else:
+        
+            if round_counter == 7: #When user failed 6 attempts, game ends
+                print(f'Round : {round_counter -1}/6\nNot in word, game over!')
                 break
+            
             else:
+        
+                print("Guess:")
+                guess = guess_word(input(), word)#sending user input to be checked if correct
                 
-                if guess != False:
-                    print(f'Counter : {round_counter}')
-                    current_letters = game.add_letter(guess)
+                if guess == word:
+                    print("You won!")
+                    break
+                else:
                     
-                    if guess not in guessed_letters:
-                        guessed_letters.append(guess)
-                        format_game(current_letters, round_counter)
-                    
+                    if guess != False:
+                        print(f'Round : {round_counter}')
+                        current_letters = game.add_letter(guess)
                         
+                        if guess not in guessed_letters:
+                            guessed_letters.append(guess)
+                            format_game(current_letters, round_counter)
+                        
+                            
+                        else:
+                            print(f"Round : {round_counter}/6 You've already used this letter")
+                            round_counter += 1
+                            format_game(current_letters, round_counter)
+
                     else:
-                        print("You've already used this letter")
+                        print(f'Round : {round_counter}/6\nNot in word, try again')
                         round_counter += 1
                         format_game(current_letters, round_counter)
-
-                else:
-                    print(f'Counter : {round_counter}')
-                    print("not in letter")
-                    round_counter += 1
-                    format_game(current_letters, round_counter)
-                
-        
+                    
+            
 
 
 main()
