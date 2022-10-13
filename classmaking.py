@@ -20,7 +20,8 @@ class HangMan:
                 #print([guess_letter if x == key_dic else x for x in self.game])
                 return self.game
                 #kickoff = [item.replace(number,guess_letter) for item in self.game if int(number) in dict.values()]
-    
+    def start_of_game(self):
+       return format_game(self.game,1)
     
 def display_art(round):
         if round == 1:
@@ -93,6 +94,7 @@ def display_art(round):
         |
     ========='''
             return wrong6
+
 def format_game(list_of_letter, round):
     print(display_art(round))
     letter_list = [str(x) for x in list_of_letter] #Change our list of ints and stings to list of only strings
@@ -103,7 +105,7 @@ def format_game(list_of_letter, round):
 def alphabet_dict():
     letters = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p", \
                "q","r","s","t","u","v","w","x","y","z"]
-    random_nums = random.sample(range(1,27), 26)#Random order of numbers 1 - 26
+    random_nums = random.sample(range(1,27), 26)#Numbers 1-26 in a random sequence each time
     final_list = [] #List of letter and random number alternating
 
     for num, letter in zip(letters, random_nums):#Combining our two lists random numbers and letters
@@ -128,7 +130,7 @@ def main():
     guessed_letters = []
     alpha = alphabet_dict()
     print("Enter a letter to guess word\n")
-    game = HangMan("banana",alpha )
+    game = HangMan("banana",alpha)
     round_counter = 1 #Round counter, starts at so user sees 1 first instead 0
 
     while True:
@@ -138,6 +140,7 @@ def main():
             break
         
         else:
+            game.start_of_game()
             print("Guess:")
             guess = guess_word(input())#sending user input to be checked if correct
             
