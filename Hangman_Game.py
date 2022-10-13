@@ -7,7 +7,6 @@ chrishorton https://github.com/chrishorton
 For Hangman Art
 """
 import random
-from re import T
 
 
 class HangMan:
@@ -137,9 +136,9 @@ def word_bank():
     return random.choice(bank_of_words)
 
 def if_winner(list_of_letters, playin_word):
-    ceck = [str(x) for x in list_of_letters]
-    ceck = "".join(ceck)
-    if ceck == playin_word:
+    check = [str(x) for x in list_of_letters]
+    check = "".join(check)
+    if check == playin_word:
         return True
     else:
         return False
@@ -187,12 +186,12 @@ def main():
                         
                             
                         else:
-                            print(f"Round : {round_counter}/6 You've already used this letter")
+                            print(f"Round : {round_counter}/6 You've already used this letter\n")
                             round_counter += 1
                             format_game(current_letters, round_counter)
 
                     else:
-                        print(f'Round : {round_counter}/6\nNot in word, try again')
+                        print(f'Round : {round_counter}/6\nNot in word, try again\n')
                         round_counter += 1
                         format_game(current_letters, round_counter)
                     
