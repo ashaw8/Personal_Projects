@@ -5,23 +5,20 @@ import random
 class HangMan:
     def __init__(self, word, a_dict) -> None:
         self.game = [] #Number values representing each letter in given game
-        self.a_dict = a_dict
-        for char in word:
-            if char in a_dict.keys():
-                self.game.append(list(a_dict.values())[list(a_dict.keys()).index(char)])
+        self.a_dict = a_dict #version of dict to be used by rest of methods
+        for char in word:#Each letter in the word the user must guess
+            if char in a_dict.keys():#if the letter is in our dictionary of letters, keys
+                self.game.append(list(a_dict.values())[list(a_dict.keys()).index(char)])#Append the value of that key to self.game
 
-        #print(self.a_dict)      
-        #self.game = [str(x) for x in self.game]
         
     def add_letter(self, guess_letter):
-        key_dic = self.a_dict[guess_letter]
-        if key_dic in self.a_dict.values() and key_dic == key_dic:
-                self.game[:] = [guess_letter if x == key_dic else x for x in self.game]
-                #print([guess_letter if x == key_dic else x for x in self.game])
-                return self.game
-                #kickoff = [item.replace(number,guess_letter) for item in self.game if int(number) in dict.values()]
+        key_dic = self.a_dict[guess_letter]#Calling the value of a key from a dict based off user, assign it to varriable
+        if key_dic in self.a_dict.values() and key_dic == key_dic:#Make sure its in our dict
+                self.game[:] = [guess_letter if x == key_dic else x for x in self.game]#Replace the number with the letter the user got correct
+                return self.game#return our right/not guess list of values from word to be guessed.
+            
     def start_of_game(self):
-       return format_game(self.game,1)
+       return format_game(self.game,1)#Display start of game screen
     
 def display_art(round):
         if round == 1:
@@ -104,7 +101,7 @@ def format_game(list_of_letter, round):
         
 def alphabet_dict():
     letters = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p", \
-               "q","r","s","t","u","v","w","x","y","z"]
+               "q","r","s","t","u","v","w","x","y","z"]#List of letters
     random_nums = random.sample(range(1,27), 26)#Numbers 1-26 in a random sequence each time
     final_list = [] #List of letter and random number alternating
 
@@ -112,16 +109,16 @@ def alphabet_dict():
             final_list.append(num)#Number first to be key in dict
             final_list.append(letter)#alternate with number to be value
 
-    dict = {final_list[i]: final_list[i + 1] for i in range(0, len(final_list), 2)}
+    dict = {final_list[i]: final_list[i + 1] for i in range(0, len(final_list), 2)}#Assigning each value in the list to a key:pair value in alternating order
     return dict
   
     
 def guess_word(guess):
     word = "banana"
-    if guess in word:
-        return guess
+    if guess in word:#Checking if user guess was right
+        return guess#If see return back the letter
     else:
-        return False
+        return False#If not return Falsey value
         
 
 def main():
@@ -136,7 +133,6 @@ def main():
     while True:
         
         if round_counter == 7: #When user failed 7 attempts, game ends
-            
             break
         
         else:
