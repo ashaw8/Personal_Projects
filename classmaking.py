@@ -1,21 +1,17 @@
-from pdb import line_prefix
+
 import random
-from re import X
+
 
 class HangMan:
     def __init__(self, word, a_dict) -> None:
-        self.game = []
+        self.game = [] #Number values representing each letter in given game
         self.a_dict = a_dict
         for char in word:
             if char in a_dict.keys():
                 self.game.append(list(a_dict.values())[list(a_dict.keys()).index(char)])
+
         #print(self.a_dict)      
         #self.game = [str(x) for x in self.game]
-        
-    def format_game(self,word):
-        string = "_\t"
-        self.game = '\t'.join(self.game)
-        self.game = f'{string * len(word)}\n{self.game}'
         
     def add_letter(self, guess_letter):
         key_dic = self.a_dict[guess_letter]
@@ -25,11 +21,8 @@ class HangMan:
                 return self.game
                 #kickoff = [item.replace(number,guess_letter) for item in self.game if int(number) in dict.values()]
     
-    def test(self):
-        for i in self.game:
-            print(i)
     
-    def display_art(self,round):
+def display_art(round):
         if round == 1:
             start = '''
     +---+
@@ -69,6 +62,8 @@ class HangMan:
         |
         |
     ========='''
+            return wrong3
+        elif round == 5:
             wrong4 = '''
     +---+
     |   |
@@ -77,6 +72,8 @@ class HangMan:
         |
         |
     ========='''
+            return wrong4
+        elif round == 6:
             wrong5 = '''
     +---+
     |   |
@@ -85,6 +82,8 @@ class HangMan:
     /    |
         |
     ========='''
+            return wrong5
+        else:
             wrong6 = '''
     +---+
     |   |
@@ -93,7 +92,13 @@ class HangMan:
     / \  |
         |
     ========='''
-        
+            return wrong6
+def format_game(list_of_letter, round):
+    print(display_art(round))
+    letter_list = [str(x) for x in list_of_letter] #Change our list of ints and stings to list of only strings
+    print('\t'.join(letter_list)) #print our strings with tab spaces inbetween
+
+            
         
 def alphabet_dict():
     letters = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p", \
@@ -107,10 +112,7 @@ def alphabet_dict():
 
     dict = {final_list[i]: final_list[i + 1] for i in range(0, len(final_list), 2)}
     return dict
-
-#def list_to_dict(lst):
-    #res_dct = {lst[i]: lst[i + 1] for i in range(0, len(lst), 2)}#Assign key/value pairs by alternating through range of list
-    #return res_dct  
+  
     
 def guess_word(guess):
     word = "banana"
@@ -120,12 +122,6 @@ def guess_word(guess):
         return False
         
 
-def display_found_letters(letters):
-    joined_word = ''.join(letters)
-    word = "orange"
-    
-    
-
 def main():
     
     flag = True
@@ -133,29 +129,40 @@ def main():
     alpha = alphabet_dict()
     print("Enter a letter to guess word\n")
     game = HangMan("banana",alpha )
+    round_counter = 1 #Round counter, starts at so user sees 1 first instead 0
 
-    while flag == True:
-        print("Guess:")
-        guess = guess_word(input())
-        if guess != False:
+    while True:
+        
+        if round_counter == 7: #When user failed 7 attempts, game ends
             
-            if guess not in guessed_letters:
-                guessed_letters.append(guess)
-                current_letters = game.add_letter(guess)
-                current_letters = [str(x) for x in current_letters]
-                print(current_letters)
-            else:
-                print("You've already used this letter")
-
+            break
+        
         else:
-            print("not in letter")
+            print("Guess:")
+            guess = guess_word(input())#sending user input to be checked if correct
+            
+            if guess != False:
+                print(f'Counter : {round_counter}')
+                
+                if guess not in guessed_letters:
+                    guessed_letters.append(guess)
+                    current_letters = game.add_letter(guess)
+                    format_game(current_letters, round_counter)
+                
+                    
+                else:
+                    print("You've already used this letter")
+                    round_counter += 1
+                    format_game(current_letters, round_counter)
+
+            else:
+                print(f'Counter : {round_counter}')
+                print("not in letter")
+                round_counter += 1
+                format_game(current_letters, round_counter)
+                
         
 
-#alpha = alphabet_dict()
-#print(list_to_dict(alpha))
-#num_under("banana")
+
 main()
-#man= HangMan("banana",alpha)
-#man = man.test()
-#man.format_game("banana")
-#print(man)
+
