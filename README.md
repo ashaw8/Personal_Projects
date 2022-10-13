@@ -1,5 +1,5 @@
 # Personal_Projects
-Personal projects I've created
+Personal projects I've created to improve on Python
 
 Encryption-cipher.py: #A script that ciphers each charcter you enter. You can encrypt/decrypt passwords you've entered through the script
                       #Can print encrypt/decrypt messages that are written/read from files
