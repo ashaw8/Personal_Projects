@@ -6,6 +6,7 @@ Credits:
 chrishorton https://github.com/chrishorton 
 For Hangman Art
 """
+from ast import Return
 import random
 
 
@@ -19,11 +20,15 @@ class HangMan:
 
         
     def add_letter(self, guess_letter):
-        key_dic = self.a_dict[guess_letter]#Calling the value of a key from a dict based off user, assign it to varriable
-        if key_dic in self.a_dict.values() and key_dic == key_dic:#Make sure its in our dict
-                self.game[:] = [guess_letter if x == key_dic else x for x in self.game]#Replace the number with the letter the user got correct
-                return self.game#return our right/not guess list of values from word to be guessed.
-            
+        if guess_letter == 123:
+            return self.game
+        else:
+            key_dic = self.a_dict[guess_letter]#Calling the value of a key from a dict based off user, assign it to varriable
+            if key_dic in self.a_dict.values() and key_dic == key_dic:#Make sure its in our dict
+                    self.game[:] = [guess_letter if x == key_dic else x for x in self.game]#Replace the number with the letter the user got correct
+                    return self.game#return our right/not guess list of values from word to be guessed.
+        
+    
     def start_of_game(self):
        return format_game(self.game,1)#Display start of game screen
     
@@ -120,24 +125,30 @@ def alphabet_dict():
     return dict
   
     
-def guess_word(guess):
-    word = "banana"
+def guess_word(guess, word):
     if guess in word:#Checking if user guess was right
         return guess#If see return back the letter
     else:
         return False#If not return Falsey value
         
 
+def word_bank():
+    bank_of_words = ["jigsaw","psyche","jogging","youthful","kiwifruit","banana",
+                     "zombie","marquis","funny","jazz","delete","pond",
+                     "america","mexico","dental","oxygen","bookworm","vodka"]
+    return random.choice(bank_of_words)
+
 def main():
-    
+     
     flag = True
     guessed_letters = []
     alpha = alphabet_dict()
-    word = "banana"
+    word = word_bank()
     print("Enter a letter to guess word\n")
-    game = HangMan("banana",alpha)
+    game = HangMan(word,alpha)
     game.start_of_game()
     round_counter = 1 #Round counter, starts at so user sees 1 first instead 0
+    current_letters = game.add_letter(123)
 
     while True:
         
@@ -145,20 +156,21 @@ def main():
             break
         
         else:
-    
+      
             print("Guess:")
-            guess = guess_word(input())#sending user input to be checked if correct
+            guess = guess_word(input(), word)#sending user input to be checked if correct
             
             if guess == word:
                 print("You won!")
                 break
             else:
+                
                 if guess != False:
                     print(f'Counter : {round_counter}')
+                    current_letters = game.add_letter(guess)
                     
                     if guess not in guessed_letters:
                         guessed_letters.append(guess)
-                        current_letters = game.add_letter(guess)
                         format_game(current_letters, round_counter)
                     
                         
@@ -177,4 +189,5 @@ def main():
 
 
 main()
+
 
