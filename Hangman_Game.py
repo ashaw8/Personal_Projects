@@ -133,8 +133,10 @@ def main():
     flag = True
     guessed_letters = []
     alpha = alphabet_dict()
+    word = "banana"
     print("Enter a letter to guess word\n")
     game = HangMan("banana",alpha)
+    game.start_of_game()
     round_counter = 1 #Round counter, starts at so user sees 1 first instead 0
 
     while True:
@@ -143,29 +145,33 @@ def main():
             break
         
         else:
-            game.start_of_game()
+    
             print("Guess:")
             guess = guess_word(input())#sending user input to be checked if correct
             
-            if guess != False:
-                print(f'Counter : {round_counter}')
-                
-                if guess not in guessed_letters:
-                    guessed_letters.append(guess)
-                    current_letters = game.add_letter(guess)
-                    format_game(current_letters, round_counter)
-                
+            if guess == word:
+                print("You won!")
+                break
+            else:
+                if guess != False:
+                    print(f'Counter : {round_counter}')
                     
+                    if guess not in guessed_letters:
+                        guessed_letters.append(guess)
+                        current_letters = game.add_letter(guess)
+                        format_game(current_letters, round_counter)
+                    
+                        
+                    else:
+                        print("You've already used this letter")
+                        round_counter += 1
+                        format_game(current_letters, round_counter)
+
                 else:
-                    print("You've already used this letter")
+                    print(f'Counter : {round_counter}')
+                    print("not in letter")
                     round_counter += 1
                     format_game(current_letters, round_counter)
-
-            else:
-                print(f'Counter : {round_counter}')
-                print("not in letter")
-                round_counter += 1
-                format_game(current_letters, round_counter)
                 
         
 
