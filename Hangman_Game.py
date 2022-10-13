@@ -1,4 +1,11 @@
+"""
+Author: Aidan Shawyer
+10/12/2022
 
+Credits: 
+chrishorton https://github.com/chrishorton 
+For Hangman Art
+"""
 import random
 
 
