@@ -151,7 +151,7 @@ def main():
     print("Enter a letter to guess word\n")
     game = HangMan(word,alpha)
     game.start_of_game()
-    round_counter = 1 #Round counter, starts at so user sees 1 first instead 0
+    round_counter = 1 #Round counter, starts at 1 so user sees 1 first instead 0
     current_letters = game.add_letter(123)
     
     while True:
